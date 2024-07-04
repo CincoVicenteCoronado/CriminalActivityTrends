@@ -1,0 +1,185 @@
+Comandos:
+
+java -jar mdp-kafka.jar PoliceSimulator /data/2024/uhadoop/cincosolo/archivo.tsv.gz cinco 1000000
+Este comando escribe en el topico cinco todos los crimenes que se encuentran en el archivo 'archivo.tsv.gz', usando un speedup de 1000000.
+
+java -jar mdp-kafka.jar CrimeFilter cinco cincofilter '100XX W OHARE ST, 076XX S CICERO AVE, 008XX N MICHIGAN AVE'
+Este comando filtra los crimenes leidos del topico 'cinco', escribiendo en el topico 'cincofilter' los crimenes que sean de tipo 'THEFT' o 'SEX ABUSE' y que hallan sido
+cometidos en los bloques 100XX W OHARE ST, 076XX S CICERO AVE y 008XX N MICHIGAN AVE.
+
+java -jar mdp-kafka.jar BurstDetector cincofilter '100XX W OHARE ST, 076XX S CICERO AVE, 008XX N MICHIGAN AVE'
+Este comando detecta rafagas de tamaño 3 en un intervalo de 6 horas de crimenes cometidos en los bloques 100XX W OHARE ST, 076XX S CICERO AVE y 008XX N MICHIGAN AVE,
+leyendo desde el topico cincofilter.
+
+Los 3 bloques 100XX W OHARE ST, 076XX S CICERO AVE y 008XX N MICHIGAN AVE fueron elegidos ya que ellos son los que presentan un mayor indice de crimen en general,
+siendo el top 3 de incidentes ocurridos en el dataset.
+
+El codigo completo puede ser encontrado en el siguiente enlace:
+https://github.com/CincoVicenteCoronado/CriminalActivityTrends
+
+Rafagas detectadas:
+
+START event-id: 0: start: 1199293200000value: 895247    6006646 HP102840        2008-01-02 14:00:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 1800000 ms
+END event-id: 1 rate: 3 records in 37800000 ms
+START event-id: 1: start: 1199978100000value: 902656    6020630 HP120504        2008-01-10 12:15:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 2 rate: 3 records in 78300000 ms
+START event-id: 2: start: 1200845700000value: 912958    6040138 HP142356        2008-01-20 13:15:00     100XX W OHARE ST        0870    THEFT   POCKET-PICKING  False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 2100000 ms
+END event-id: 3 rate: 3 records in 32400000 ms
+START event-id: 3: start: 1200996600000value: 909892    6033443 HP137019        2008-01-22 07:10:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3000000 ms
+END event-id: 4 rate: 3 records in 87120000 ms
+START event-id: 4: start: 1201173000000value: 918507    6051240 HP148997        2008-01-24 08:10:00     100XX W OHARE ST        0910    MOTOR VEHICLE THEFT     AUTOMOBILE      True    False       1651    07      2008    02/04/2016 06:33:39 AM rate: 3 records in 3000000 ms
+END event-id: 5 rate: 3 records in 35100000 ms
+START event-id: 5: start: 1201269600000value: 913711    6041439 HP144029        2008-01-25 11:00:00     100XX W OHARE ST        0870    THEFT   POCKET-PICKING  False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 1500000 ms
+END event-id: 6 rate: 3 records in 37440000 ms
+START event-id: 6: start: 1202144400000value: 923647    6061314 HP158799        2008-02-04 14:00:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 7 rate: 3 records in 91800000 ms
+START event-id: 7: start: 1203006000000value: 932492    6078304 HP175208        2008-02-14 13:20:00     100XX W OHARE ST        0870    THEFT   POCKET-PICKING  False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 2400000 ms
+END event-id: 8 rate: 3 records in 68400000 ms
+START event-id: 8: start: 1203519600000value: 1010698   6217005 HP305449        2008-02-20 12:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2008    02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 9 rate: 3 records in 281700000 ms
+START event-id: 9: start: 1203818400000value: 943280    6101521 HP192616        2008-02-23 23:00:00     100XX W OHARE ST        0870    THEFT   POCKET-PICKING  False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 10 rate: 3 records in 55800000 ms
+START event-id: 10: start: 1203987600000value: 942658   6100294 HP195005        2008-02-25 22:00:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 11 rate: 3 records in 139800000 ms
+START event-id: 11: start: 1204306200000value: 949288   6112184 HP201043        2008-02-29 14:30:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 12 rate: 3 records in 57900000 ms
+START event-id: 12: start: 1205138400000value: 957839   6127392 HP216819        2008-03-10 05:40:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  True    False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3000000 ms
+END event-id: 13 rate: 3 records in 37200000 ms
+START event-id: 13: start: 1205602200000value: 963212   6136917 HP226949        2008-03-15 14:30:00     100XX W OHARE ST        1220    DECEPTIVE PRACTICE      THEFT OF LOST/MISLAID PROP True     False   1651    11      2008    02/04/2016 06:33:39 AM rate: 3 records in 1800000 ms
+END event-id: 14 rate: 3 records in 75600000 ms
+START event-id: 14: start: 1205852400000value: 998688   6197825 HP280564        2008-03-18 12:00:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 900000 ms
+END event-id: 15 rate: 3 records in 26400000 ms
+START event-id: 15: start: 1210177500000value: 1024611  6239968 HP322120        2008-05-07 12:25:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2008    02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 16 rate: 3 records in 24600000 ms
+START event-id: 16: start: 1211022000000value: 1037949  6261259 HP340553        2008-05-17 07:00:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 900000 ms
+END event-id: 17 rate: 3 records in 93600000 ms
+START event-id: 17: start: 1211148000000value: 1155213  6450080 HP524083        2008-05-18 18:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2008    02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 18 rate: 3 records in 28800000 ms
+START event-id: 18: start: 1211511600000value: 1044078  6270352 HP352127        2008-05-22 23:00:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 19 rate: 3 records in 27000000 ms
+START event-id: 19: start: 1212009300000value: 1048176  6276665 HP364539        2008-05-28 17:15:00     100XX W OHARE ST        0890    THEFT   FROM BUILDING   False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 900000 ms
+END event-id: 20 rate: 3 records in 57600000 ms
+START event-id: 20: start: 1212620400000value: 1058103  6291481 HP376613        2008-06-04 19:00:00     100XX W OHARE ST        0890    THEFT   FROM BUILDING   False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 21 rate: 3 records in 30120000 ms
+START event-id: 21: start: 1212840000000value: 1070721  6310848 HP400304        2008-06-07 08:00:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 22 rate: 3 records in 172800000 ms
+START event-id: 22: start: 1214280000000value: 1078325  6323166 HP412806        2008-06-24 00:00:00     100XX W OHARE ST        0890    THEFT   FROM BUILDING   False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 23 rate: 3 records in 30600000 ms
+START event-id: 23: start: 1214928000000value: 1106256  6369761 HP456330        2008-07-01 12:00:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 24 rate: 3 records in 118140000 ms
+START event-id: 24: start: 1215046140000value: 1091836  6345282 HP429990        2008-07-02 20:49:00     100XX W OHARE ST        0930    MOTOR VEHICLE THEFT     THEFT/RECOVERY: AUTOMOBILE False    False   1651    07      2008    02/04/2016 06:33:39 AM rate: 3 records in 660000 ms
+END event-id: 25 rate: 3 records in 72600000 ms
+START event-id: 25: start: 1215478800000value: 1099789  6359298 HP446379        2008-07-07 21:00:00     100XX W OHARE ST        0890    THEFT   FROM BUILDING   False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 26 rate: 3 records in 25200000 ms
+START event-id: 26: start: 1216065600000value: 1108255  6373144 HP459653        2008-07-14 16:00:00     100XX W OHARE ST        0890    THEFT   FROM BUILDING   False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 1800000 ms
+END event-id: 27 rate: 3 records in 52200000 ms
+START event-id: 27: start: 1216301400000value: 1112629  6379776 HP465201        2008-07-17 09:30:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 28 rate: 3 records in 115740000 ms
+START event-id: 28: start: 1217268000000value: 1130348  6408806 HP482754        2008-07-28 14:00:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 29 rate: 3 records in 68400000 ms
+START event-id: 29: start: 1217688720000value: 1131674  6410955 HP489681        2008-08-02 10:52:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  True    False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 480000 ms
+END event-id: 30 rate: 3 records in 124200000 ms
+START event-id: 30: start: 1217937600000value: 1133951  6415208 HP494936        2008-08-05 08:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2008    02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 31 rate: 3 records in 93600000 ms
+START event-id: 31: start: 1218470400000value: 1184291  6498468 HP565322        2008-08-11 12:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2008    02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 32 rate: 3 records in 29700000 ms
+START event-id: 32: start: 1218729600000value: 1202657  6527276 HP594146        2008-08-14 12:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2008    02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 33 rate: 3 records in 27000000 ms
+START event-id: 33: start: 1219008600000value: 1148243  6438760 HP520166        2008-08-17 17:30:00     100XX W OHARE ST        0890    THEFT   FROM BUILDING   False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 1800000 ms
+END event-id: 34 rate: 3 records in 55200000 ms
+START event-id: 34: start: 1219073400000value: 1148618  6439371 HP521001        2008-08-18 11:30:00     100XX W OHARE ST        0890    THEFT   FROM BUILDING   False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 900000 ms
+END event-id: 35 rate: 3 records in 89100000 ms
+START event-id: 35: start: 1219163400000value: 1152342  6445339 HP522313        2008-08-19 12:30:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 1800000 ms
+END event-id: 36 rate: 3 records in 81300000 ms
+START event-id: 36: start: 1219420800000value: 1219524  6552931 HP619072        2008-08-22 12:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2008    02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 37 rate: 3 records in 94500000 ms
+START event-id: 37: start: 1220241600000value: 1166541  6468111 HP547031        2008-09-01 00:00:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 60000 ms
+END event-id: 38 rate: 3 records in 38340000 ms
+START event-id: 38: start: 1221397200000value: 1259291  6614232 HP675471        2008-09-14 09:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2008    02/04/2016 06:33:39 AM rate: 3 records in 3000000 ms
+END event-id: 39 rate: 3 records in 25800000 ms
+START event-id: 39: start: 1222877100000value: 1210371  6539244 HP603206        2008-10-01 12:05:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3300000 ms
+END event-id: 40 rate: 3 records in 157200000 ms
+START event-id: 40: start: 1223049600000value: 1209546  6537789 HP611438        2008-10-03 12:00:00     100XX W OHARE ST        0870    THEFT   POCKET-PICKING  False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 41 rate: 3 records in 115200000 ms
+START event-id: 41: start: 1225121400000value: 1236624  6579576 HP650738        2008-10-27 12:30:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 300000 ms
+END event-id: 42 rate: 3 records in 170700000 ms
+START event-id: 42: start: 1227104400000value: 1263988  6622454 HP691005        2008-11-19 11:20:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2008    02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 43 rate: 3 records in 178800000 ms
+START event-id: 43: start: 1229860800000value: 1327167  6721388 HR131631        2008-12-21 09:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2008    02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 44 rate: 3 records in 21600000 ms
+START event-id: 44: start: 1229947200000value: 1296478  6675063 HP746011        2008-12-22 09:00:00     100XX W OHARE ST        1220    DECEPTIVE PRACTICE      THEFT OF LOST/MISLAID PROP True     False   1651    11      2008    02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 45 rate: 3 records in 83400000 ms
+START event-id: 45: start: 1230116400000value: 1297135  6675987 HP748852        2008-12-24 08:00:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  False   False   1651    06 2008     02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 46 rate: 3 records in 165600000 ms
+START event-id: 46: start: 1230303600000value: 1407395  6861248 HR262605        2008-12-26 12:00:00     100XX W OHARE ST        0910    MOTOR VEHICLE THEFT     AUTOMOBILE      False   False       1651    07      2008    02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 47 rate: 3 records in 23400000 ms
+START event-id: 47: start: 1231268400000value: 1351149  6760447 HR174170        2009-01-06 16:00:00     100XX W OHARE ST        0910    MOTOR VEHICLE THEFT     AUTOMOBILE      False   False       1651    07      2009    02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 48 rate: 3 records in 234000000 ms
+START event-id: 48: start: 1231506000000value: 1315418  6704756 HR113233        2009-01-09 10:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2009    02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 49 rate: 3 records in 99000000 ms
+START event-id: 49: start: 1234033200000value: 1340192  6742546 HR160450        2009-02-07 16:00:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 1500000 ms
+END event-id: 50 rate: 3 records in 70200000 ms
+START event-id: 50: start: 1234105200000value: 1387405  6827574 HR232516        2009-02-08 12:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2009    02/04/2016 06:33:39 AM rate: 3 records in 900000 ms
+END event-id: 51 rate: 3 records in 43800000 ms
+START event-id: 51: start: 1235905200000value: 1362732  6781371 HR193662        2009-03-01 08:00:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  True    False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 52 rate: 3 records in 27000000 ms
+START event-id: 52: start: 1236086820000value: 1377211  6809100 HR211847        2009-03-03 10:27:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 1380000 ms
+END event-id: 53 rate: 3 records in 241800000 ms
+START event-id: 53: start: 1237118400000value: 1378688  6812275 HR216599        2009-03-15 08:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2009    02/04/2016 06:33:39 AM rate: 3 records in 3000000 ms
+END event-id: 54 rate: 3 records in 87000000 ms
+START event-id: 54: start: 1237563000000value: 1382223  6818862 HR227819        2009-03-20 11:30:00     100XX W OHARE ST        0890    THEFT   FROM BUILDING   False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 1800000 ms
+END event-id: 55 rate: 3 records in 21900000 ms
+START event-id: 55: start: 1241884800000value: 1440420  6915928 HR314887        2009-05-09 12:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2009    02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 56 rate: 3 records in 126000000 ms
+START event-id: 56: start: 1242133200000value: 1441699  6917819 HR316506        2009-05-12 09:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2009    02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 57 rate: 3 records in 36000000 ms
+START event-id: 57: start: 1244296200000value: 1472798  6966928 HR365821        2009-06-06 09:50:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 600000 ms
+END event-id: 58 rate: 3 records in 101400000 ms
+START event-id: 58: start: 1244748600000value: 1476902  6973104 HR371186        2009-06-11 15:30:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 1800000 ms
+END event-id: 59 rate: 3 records in 72000000 ms
+START event-id: 59: start: 1245085380000value: 1485479  6986639 HR384613        2009-06-15 13:03:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 3420000 ms
+END event-id: 60 rate: 3 records in 100800000 ms
+START event-id: 60: start: 1245438000000value: 1485478  6986638 HR383851        2009-06-19 15:00:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 61 rate: 3 records in 21600000 ms
+START event-id: 61: start: 1245662820000value: 1486668  6988591 HR388081        2009-06-22 05:27:00     100XX W OHARE ST        1210    DECEPTIVE PRACTICE      THEFT OF LABOR/SERVICES False       False   1651    11      2009    02/04/2016 06:33:39 AM rate: 3 records in 180000 ms
+END event-id: 62 rate: 3 records in 24300000 ms
+START event-id: 62: start: 1246096620000value: 1500104  7008607 HR407752        2009-06-27 05:57:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 1080000 ms
+END event-id: 63 rate: 3 records in 99900000 ms
+START event-id: 63: start: 1246217400000value: 1496272  7003106 HR409356        2009-06-28 15:30:00     100XX W OHARE ST        0890    THEFT   FROM BUILDING   False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 64 rate: 3 records in 73800000 ms
+START event-id: 64: start: 1246374000000value: 1497669  7004820 HR404064        2009-06-30 11:00:00     100XX W OHARE ST        1206    DECEPTIVE PRACTICE      THEFT BY LESSEE,MOTOR VEH  False    False   1651    11      2009    02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 65 rate: 3 records in 168360000 ms
+START event-id: 65: start: 1248037200000value: 1516044  7033238 HR440423        2009-07-19 17:00:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 66 rate: 3 records in 97200000 ms
+START event-id: 66: start: 1248945300000value: 1526868  7050520 HR456244        2009-07-30 05:15:00     100XX W OHARE ST        0890    THEFT   FROM BUILDING   False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 3300000 ms
+END event-id: 67 rate: 3 records in 285300000 ms
+START event-id: 67: start: 1250775000000value: 1557150  7094835 HR493816        2009-08-20 09:30:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 1800000 ms
+END event-id: 68 rate: 3 records in 75600000 ms
+START event-id: 68: start: 1251159300000value: 1562828  7103226 HR501631        2009-08-24 20:15:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 900000 ms
+END event-id: 69 rate: 3 records in 28980000 ms
+START event-id: 69: start: 1252064100000value: 1571407  7116329 HR519052        2009-09-04 07:35:00     100XX W OHARE ST        1210    DECEPTIVE PRACTICE      THEFT OF LABOR/SERVICES False       False   1651    11      2009    02/04/2016 06:33:39 AM rate: 3 records in 300000 ms
+END event-id: 70 rate: 3 records in 42600000 ms
+START event-id: 70: start: 1253289600000value: 1583341  7135123 HR543780        2009-09-18 12:00:00     100XX W OHARE ST        0890    THEFT   FROM BUILDING   False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 0 ms
+END event-id: 71 rate: 3 records in 65400000 ms
+START event-id: 71: start: 1254778200000value: 1603954  7166162 HR575801        2009-10-05 17:30:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 1800000 ms
+END event-id: 72 rate: 3 records in 48600000 ms
+START event-id: 72: start: 1254931500000value: 1639576  7220264 HR627767        2009-10-07 12:05:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 1500000 ms
+END event-id: 73 rate: 3 records in 66600000 ms
+START event-id: 73: start: 1255749300000value: 1616297  7185762 HR592135        2009-10-17 00:15:00     100XX W OHARE ST        1210    DECEPTIVE PRACTICE      THEFT OF LABOR/SERVICES False       False   1651    11      2009    02/04/2016 06:33:39 AM rate: 3 records in 2700000 ms
+END event-id: 74 rate: 3 records in 126000000 ms
+START event-id: 74: start: 1256301000000value: 1624209  7197368 HR605509        2009-10-23 09:30:00     100XX W OHARE ST        0820    THEFT   $500 AND UNDER  False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 1800000 ms
+END event-id: 75 rate: 3 records in 101700000 ms
+START event-id: 75: start: 1258985700000value: 1656802  7247557 HR659099        2009-11-23 11:15:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 2700000 ms
+END event-id: 76 rate: 3 records in 24300000 ms
+START event-id: 76: start: 1259427000000value: 1669255  7267087 HR681176        2009-11-28 13:50:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 2400000 ms
+END event-id: 77 rate: 3 records in 75900000 ms
+START event-id: 77: start: 1260280800000value: 1671745  7271156 HR679617        2009-12-08 11:00:00     100XX W OHARE ST        0860    THEFT   RETAIL THEFT    True    False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 78 rate: 3 records in 86400000 ms
+START event-id: 78: start: 1260381600000value: 1677653  7279811 HR682804        2009-12-09 15:00:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 2400000 ms
+END event-id: 79 rate: 3 records in 48960000 ms
+START event-id: 79: start: 1261411200000value: 1688637  7296268 HR701421        2009-12-21 13:00:00     100XX W OHARE ST        0910    MOTOR VEHICLE THEFT     AUTOMOBILE      False   False       1651    07      2009    02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 80 rate: 3 records in 81000000 ms
+START event-id: 80: start: 1261684800000value: 1685314  7290433 HR707805        2009-12-24 17:00:00     100XX W OHARE ST        0890    THEFT   FROM BUILDING   False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 1800000 ms
+END event-id: 81 rate: 3 records in 163800000 ms
+START event-id: 81: start: 1262287800000value: 1693404  7303568 HR713478        2009-12-31 16:30:00     100XX W OHARE ST        0810    THEFT   OVER $500       False   False   1651    06 2009     02/04/2016 06:33:39 AM rate: 3 records in 3600000 ms
+END event-id: 82 rate: 3 records in 250200000 ms
