@@ -21,6 +21,7 @@ public class PoliceSimulator {
 			System.err.println("Usage: [crime_data_file_gzipped] [crime_topic] [speed_up (int)]");
 			return;
 		}
+		// Abrir y leer el archivo de datos comprimido gzip
 		BufferedReader crimeData = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(args[0]))));
 
 		String crimeTopic = args[1];
@@ -29,6 +30,8 @@ public class PoliceSimulator {
 
 		Producer<String, String> crimeProducer = new KafkaProducer<String, String>(KafkaConstants.PROPS);
 
+		// Iniciar la simulación de generación de datos de crimen
+
 		CrimeStream crimeStream = new CrimeStream(crimeData,CRIME_ID,  DATE_ID, crimeProducer, crimeTopic, speedUp);
 
 		Thread crimeThread = new Thread(crimeStream);
@@ -36,7 +39,7 @@ public class PoliceSimulator {
 		crimeThread.start();
 
 		try {
-			crimeThread.join();
+			crimeThread.join(); // Esperar a que termine el hilo de simulación
 		} catch (InterruptedException e) {
 			System.err.println("Interrupted!");
 		}

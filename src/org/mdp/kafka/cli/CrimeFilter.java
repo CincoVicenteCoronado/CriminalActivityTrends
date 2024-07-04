@@ -15,6 +15,7 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class CrimeFilter {
+    // Palabras clave para detectar crímenes
     public static final String[] CRIME_SUBSTRINGS = new String[] { "sex abuse", "theft" };
 
     public static void main(String[] args) {
@@ -24,14 +25,15 @@ public class CrimeFilter {
         }
 
         Properties props = KafkaConstants.PROPS;
-        
+        // Palabras clave de zonas donde se filtran los crímenes
         String[] ZONE_SUBSTRINGS = args[2].split(",");
         for (int i = 0; i < ZONE_SUBSTRINGS.length; i++) {
                  ZONE_SUBSTRINGS[i] = ZONE_SUBSTRINGS[i].toLowerCase();
              }
 
-        // randomise consumer ID so messages cannot be read by another consumer
-        //   (or at least it's more likely that a meteor wipes out life on Earth)
+        // Generar un ID de grupo aleatorio para el consumidor Kafka
+        // Esto asegura que los mensajes no sean leídos por otros consumidores
+        // (o al menos reduce la probabilidad de conflicto)
         props.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);

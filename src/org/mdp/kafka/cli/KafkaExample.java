@@ -62,7 +62,7 @@ public class KafkaExample {
 						Thread.sleep(1000);
 						i++;
 						
-						// on the hour, write an extra record ...
+
 						if(i % 3600 == 0) {
 							producer.send(new ProducerRecord<String,String>(topic, partition, timestamp, "cuckoo", value));
 						}

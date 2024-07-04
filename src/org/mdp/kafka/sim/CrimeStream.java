@@ -10,7 +10,7 @@ import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
 public class CrimeStream implements Runnable {
-	// cannot be static since not synchronised
+	// Formato de fecha para analizar las fechas de crimen
 	public final SimpleDateFormat CRIME_DATE = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	BufferedReader br;
@@ -22,11 +22,13 @@ public class CrimeStream implements Runnable {
 	int dateColumnIndex;
 	Producer<String, String> producer;
 	String topic;
-	
+
+	// Constructor para iniciar la simulación
 	public CrimeStream(BufferedReader br, int id, int dateColumnIndex, Producer<String, String> producer, String topic, int speedup){
 		this(br,id, dateColumnIndex ,System.currentTimeMillis(),producer,topic,speedup);
 	}
-	
+
+	// Constructor que acepta un tiempo de inicio específico para la simulación
 	public CrimeStream(BufferedReader br, int id, int dateColumnIndex, long startSim, Producer<String, String> producer, String topic, int speedup){
 		this.br = br;
 		this.id = id;
@@ -57,6 +59,7 @@ public class CrimeStream implements Runnable {
 						if(wait>0){
 							Thread.sleep(wait);
 						}
+						// Enviar el registro al topic de Kafka
 						producer.send(new ProducerRecord<String,String>(topic, 0, timeData, idStr, line));
 					} catch(ParseException | NumberFormatException pe){
 						System.err.println("Cannot parse date "+tabs[dateColumnIndex]);
@@ -75,29 +78,29 @@ public class CrimeStream implements Runnable {
 		
 		System.err.println("Finished! Messages were "+wait+" ms from target speed-up times.");
 	}
-	
+
+
+	// Método para calcular el tiempo de espera antes de enviar un nuevo registro
 	private long calculateWait(long time) {
 		long current = System.currentTimeMillis();
 		
-		// how long we have waited since start
+
 		long delaySim = current - startSim;
 		if(delaySim<0){
-			// the first element ...
-			// wait until startSim
 			return delaySim*-1;
 		}
 		
-		// calculate how long we should wait since start
+
 		long delayData = time - startData;
 		long shouldDelay = delayData / speedup;
 		
-		// if we've already waited long enough
+
 		if(delaySim>=shouldDelay) return 0;
-		// otherwise return wait time
+
 		else return shouldDelay - delaySim;
 	}
 
-	// example 2017-09-19 00:07:03
+	// Método para convertir una cadena de fecha y hora en tiempo UNIX
 	public long getUnixTime(String dateTime) throws ParseException{
 		Date d = CRIME_DATE.parse( dateTime );
 		return d.getTime();

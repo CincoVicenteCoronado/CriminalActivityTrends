@@ -14,6 +14,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.mdp.kafka.def.KafkaConstants;
 
 public class PrintCrime {
+	// Palabras clave para detectar crímenes
 	public static final String[] CRIME_SUBSTRINGS = new String[] { "sex abuse", "theft" };
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException{
@@ -21,7 +22,8 @@ public class PrintCrime {
 			System.err.println("Usage [inputTopic] [blocks]");
 			return;
 		}
-		
+
+		// Palabras clave de zonas donde se filtran los crímenes
         String[] ZONE_SUBSTRINGS = args[1].split(",");
         for (int i = 0; i < ZONE_SUBSTRINGS.length; i++) {
                  ZONE_SUBSTRINGS[i] = ZONE_SUBSTRINGS[i].toLowerCase();
@@ -30,8 +32,11 @@ public class PrintCrime {
 		
 		Properties props = KafkaConstants.PROPS;
 
-		// randomise consumer ID so messages cannot be read by another consumer
-		//   (or at least it's more likely that a meteor wipes out life on Earth)
+
+		// Generar un ID de grupo aleatorio para el consumidor Kafka
+		// Esto asegura que los mensajes no sean leídos por otros consumidores
+		// (o al menos reduce la probabilidad de conflicto)
+
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
 		
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);
@@ -41,32 +46,33 @@ public class PrintCrime {
 		try{
 			
 			while (true) {
-				// every ten milliseconds get all records in a batch
-				ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000*60));
-				// for all records in the batch
+				// Obtener todos los registros en lotes cada 10 minutos
+				ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000*60));<
+				// Procesar todos los registros en el lote
 				for (ConsumerRecord<String, String> record : records) {
 					
 					String lowercase = record.value().toLowerCase();
-					
-					// check if record value contains keyword
-					// (could be optimised a lot)
-					
+
+					//Verificar si el valor del registro contiene alguna palabra clave de crimen
+
+
 					boolean breaking = false;
 					for(String cr: CRIME_SUBSTRINGS){
 						// if so print it out to the console
 						
 						if(lowercase.contains(cr)){
+
 							if(breaking) {
 								break;
 							}
                         	for(String zs: ZONE_SUBSTRINGS) {
-                        		// if so print it out to the console
+								// Imprimir el valor del registro en la consola
                         		if(lowercase.contains(zs)) {
                         			breaking = true;
                         			System.out.println(record.value());
-                        		
-                        			// prevents multiple prints of the same crime with multiple keywords
-                        			break;
+
+									// Evitar múltiples impresiones del mismo crimen con múltiples palabras clave
+									break;
                         		}
                         	}
 						}

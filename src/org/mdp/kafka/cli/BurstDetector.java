@@ -15,6 +15,7 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class BurstDetector {
+    // Palabras clave para detectar crímenes
     public static final String[] CRIME_SUBSTRINGS = new String[] { "sex abuse", "theft" };
     // Tamaño del buffer FIFO para almacenar registros de crímenes detectados
     public static final int FIFO_SIZE = 3;
@@ -40,6 +41,9 @@ public class BurstDetector {
 
         Properties props = KafkaConstants.PROPS;
 
+        // Generar un ID de grupo aleatorio para el consumidor Kafka
+        // Esto asegura que los mensajes no sean leídos por otros consumidores
+        // (o al menos reduce la probabilidad de conflicto)
 
         props.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
 
@@ -59,12 +63,14 @@ public class BurstDetector {
                 // Procesar todos los registros en el lote
                 for (ConsumerRecord<String, String> record : records) {
                     String lowercase = record.value().toLowerCase();
-                     Verificar si el valor del registro contiene alguna palabra clave de crimen
+                     //Verificar si el valor del registro contiene alguna palabra clave de crimen
 
                     boolean breaking = false;
                     for(String cr: CRIME_SUBSTRINGS){
                         if(lowercase.contains(cr)){
-            				if(breaking) {
+                            // Si se encuentra la palabra clave de zona, imprirla
+
+                            if(breaking) {
 								break;
 							}
                         	for(String zs: ZONE_SUBSTRINGS) {
