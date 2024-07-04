@@ -47,7 +47,7 @@ public class PrintCrime {
 			
 			while (true) {
 				// Obtener todos los registros en lotes cada 10 minutos
-				ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000*60));<
+				ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000*60));
 				// Procesar todos los registros en el lote
 				for (ConsumerRecord<String, String> record : records) {
 					
